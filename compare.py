@@ -6,6 +6,8 @@ from matplotlib import pyplot as plt
 # %%
 
 data_desktop = pd.read_csv("desktop_prices.txt", header=None)
+data_desktop = data_desktop[data_desktop<400]
+data_desktop = data_desktop.dropna()
 # %%
 data_phone = pd.read_csv("phone_prices.txt", header=None)
 
@@ -20,14 +22,6 @@ plt.plot(data_phone, label="phone")
 plt.savefig("line_plot.png")
 plt.show()
 # %%
-
-plt.plot(data_desktop)
-# %%
-
-plt.plot(data_phone)
-# %%
-
-
 data_desktop.describe()
 # %%
 
@@ -35,10 +29,10 @@ data_phone.describe()
 # %%
 
 
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(2, 4))
 
 
-plt.boxplot([data_desktop.iloc[:,0], data_phone.iloc[:,0]], labels=['desktop', 'phone'])
+plt.boxplot([data_desktop.iloc[:,0], data_phone.iloc[:,0]], labels=['desktop', 'phone'], widths=[0.5, 0.5])
 plt.savefig("box_plot.png")
 
 # %%
