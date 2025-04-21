@@ -11,13 +11,26 @@ data_desktop = data_desktop.dropna()
 # %%
 data_phone = pd.read_csv("phone_prices.txt", header=None)
 
+#%%
+data_desktop
+#%%
+data_desktop = data_desktop.sort_values(by=0)
+data_desktop
+#%%
+data_desktop.index
+#%%
+data_desktop.index = list(range(len(data_desktop)))
+# %%
+data_phone = data_phone.sort_values(by=0)
+data_phone.index = list(range(len(data_phone)))
 # %%
 plt.figure(figsize=(8, 6))  # Optional: Adjust figure size
 
 
-plt.plot(data_desktop, label="desktop")
+plt.plot(data_desktop, linestyle="--", label="desktop")
 
-plt.plot(data_phone, label="phone")
+plt.plot(data_phone, linestyle="-", label="phone")
+plt.legend()
 
 plt.savefig("line_plot.png")
 plt.show()
@@ -34,7 +47,7 @@ plt.figure(figsize=(3, 6))
 
 plt.boxplot(
     [data_desktop.iloc[:, 0], data_phone.iloc[:, 0]],
-    labels=["desktop", "phone"],
+    tick_labels=["desktop", "phone"],
     widths=[0.7, 0.7],
 )
 plt.savefig("box_plot.png")
