@@ -17,8 +17,8 @@ plt.plot(data_desktop, label="desktop")
 
 plt.plot(data_phone, label="phone")
 
-plt.show()
 plt.savefig("line_plot.png")
+plt.show()
 # %%
 
 plt.plot(data_desktop)
