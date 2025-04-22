@@ -21,8 +21,10 @@ data_desktop.index
 #%%
 data_desktop.index = list(range(len(data_desktop)))
 # %%
+index2=[len(data_desktop)/len(data_phone)*i for i in range(len(data_phone))]
+# %%
 data_phone = data_phone.sort_values(by=0)
-data_phone.index = list(range(len(data_phone)))
+data_phone.index = index2
 # %%
 plt.figure(figsize=(8, 6))  # Optional: Adjust figure size
 
@@ -37,14 +39,9 @@ plt.show()
 # %%
 data_desktop.describe()
 # %%
-
 data_phone.describe()
 # %%
-
-
 plt.figure(figsize=(3, 6))
-
-
 plt.boxplot(
     [data_desktop.iloc[:, 0], data_phone.iloc[:, 0]],
     tick_labels=["desktop", "phone"],
@@ -53,16 +50,19 @@ plt.boxplot(
 plt.savefig("box_plot.png")
 
 # %%
-data_desktop.mean()
-
-
+data_desktop.median()
 # %%
-data_phone.mean()
+data_phone.median()
 # %%
-data_phone.mean() - data_desktop.mean()
-# %%
-higher = (data_phone.mean() - data_desktop.mean()) / data_desktop.mean()
+higher = (data_phone.median() - data_desktop.median()) / data_desktop.median()
+percent = f"{higher.iloc[0] * 100:.0f}%"
+print(percent)
 # float(higher)
 # %%
-print(f"phone prices are higher than desktop for {higher.iloc[0] * 100:.0f}% percent.")
+from pathlib import Path  # noqa: E402
+c = Path("README.md").read_text(encoding="utf8")
+# %%
+import re  # noqa: E402
+c2 = re.sub(r'[0-9]+%', percent, c)
+Path("README.md").write_text(c2)
 # %%
